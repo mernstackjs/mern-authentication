@@ -9,6 +9,7 @@ export const createTask = async (req, res, next) => {
         message: "Missed requirments !",
       });
     const task = new Task({ title, desc, status, owner: req.user._id });
+    await task.save();
     res.status(201).json({
       success: true,
       message: "new task is added",
