@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { Appcontext } from "../../../context/appcontext";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateTask() {
   const { user } = useContext(Appcontext);
@@ -10,6 +11,7 @@ export default function CreateTask() {
     status: "",
   });
 
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTaskData((prev) => ({
@@ -18,12 +20,30 @@ export default function CreateTask() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
-    const task = { taskData, user: user._id };
-    console.log("Task Created:", task);
+    const res = await fetch("http://localhost:3000/api/task", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        title: taskData.title,
+        desc: taskData.desc,
+        status: taskData.status,
+        owner: user._id,
+      }),
+    });
+    if (!res.ok) {
+      const dataError = await res.json();
+      console.log(dataError);
+      setLoading(false);
+      return;
+    }
+    await res.json();
+    navigate("/account/tasks");
 
     setTaskData({
       title: "",
