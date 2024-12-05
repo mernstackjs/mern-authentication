@@ -3,6 +3,7 @@ import argon2 from "argon2";
 const userSchema = new Schema({
   fullName: String,
   email: String,
+  imageUrl: String,
   password: {
     type: String,
     select: false,
