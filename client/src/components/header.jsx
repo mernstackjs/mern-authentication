@@ -10,7 +10,7 @@ export default function Header() {
       {user ? (
         <nav className="flex justify-center items-center gap-4">
           <Link to="/">Home</Link>
-          <Link to="/profile">Profile</Link>
+          <Link to="/account">Account</Link>
           <button
             onClick={logout}
             className="py-1 px-3 bg-red-800 text-white rounded-md"

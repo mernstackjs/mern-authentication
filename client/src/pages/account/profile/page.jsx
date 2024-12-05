@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Appcontext } from "../../context/appcontext";
+import { Appcontext } from "../../../context/appcontext";
 
 export default function ProfilePage() {
   const { user, logout } = useContext(Appcontext);

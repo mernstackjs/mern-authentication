@@ -35,7 +35,7 @@ export default function LoginPage() {
       return;
     }
     const data = await res.json();
-    navigate("/login");
+    navigate("/account/profile");
 
     login(data.user);
     setLoading(false);
@@ -45,7 +45,7 @@ export default function LoginPage() {
     });
   };
 
-  if (user) return <Navigate to="/profile" />;
+  if (user) return <Navigate to="/account/profile" />;
   return (
     <div className="flex justify-center">
       <form

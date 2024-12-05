@@ -9,10 +9,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import LoginPage from "./pages/auth/login.jsx";
-import ProfilePage from "./pages/auth/profile.jsx";
 import RegisterPage from "./pages/auth/register.jsx";
 import { ProviderApp } from "./context/appcontext.jsx";
 import ProtectedRoute from "./components/protectedRoute.jsx";
+import AccountLayout from "./pages/account/layout.jsx";
+import AccountPage from "./pages/account/page.jsx";
+import ProfilePage from "./pages/account/profile/page.jsx";
+import TasksPage from "./pages/account/tasks/taskpage.jsx";
+import CreateTask from "./pages/account/tasks/create-task.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,13 +32,18 @@ const router = createBrowserRouter(
       <Route index element={<div>Home Page</div>} />
       <Route path="login" element={<LoginPage />} />
       <Route
-        path="profile"
+        path="account"
         element={
           <ProtectedRoute>
-            <ProfilePage />
+            <AccountLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route index element={<AccountPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="tasks" element={<TasksPage />} />
+        <Route path="create-task" element={<CreateTask />} />
+      </Route>
       <Route path="register" element={<RegisterPage />} />
     </Route>
   )
