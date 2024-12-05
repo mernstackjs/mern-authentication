@@ -3,6 +3,7 @@ import { config } from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import router from "./router/index.js";
+import { dbConnected } from "./utility/db.js";
 
 config();
 
@@ -28,3 +29,4 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
+dbConnected();
